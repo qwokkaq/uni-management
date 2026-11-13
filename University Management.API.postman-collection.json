@@ -1,0 +1,137 @@
+{
+  "info": {
+    "name": "University Management API",
+    "description": "API tests for the University Management System with three PostgreSQL databases.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Students",
+      "item": [
+        {
+          "name": "Get All Students",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/students"
+          }
+        },
+        {
+          "name": "Create Student",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"email\": \"john.smith@example.com\",\n  \"major\": \"Computer Science\",\n  \"enrollmentYear\": 2024\n}"
+            },
+            "url": "{{baseUrl}}/api/students"
+          }
+        },
+        {
+          "name": "Update Student (ID 2)",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Alex\",\n  \"lastName\": \"Johnson\",\n  \"email\": \"alex.johnson@gmail.com\",\n  \"major\": \"Computer Science\",\n  \"enrollmentYear\": 2024\n}"
+            },
+            "url": "{{baseUrl}}/api/students/2"
+          }
+        },
+        {
+          "name": "Delete Student (ID 2)",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/students/2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "Get All Courses",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/courses"
+          }
+        },
+        {
+          "name": "Create Course",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"courseName\": \"Introduction to Computer Science\",\n  \"courseCode\": \"CS102\",\n  \"credits\": 5,\n  \"instructor\": \"John Smith\"\n}"
+            },
+            "url": "{{baseUrl}}/api/courses"
+          }
+        },
+        {
+          "name": "Update Course (ID 1)",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"courseName\": \"Introduction to Computer Science\",\n  \"courseCode\": \"CS101\",\n  \"credits\": 5,\n  \"instructor\": \"John Smith\"\n}"
+            },
+            "url": "{{baseUrl}}/api/courses/1"
+          }
+        },
+        {
+          "name": "Delete Course (ID 1)",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/courses/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Grades",
+      "item": [
+        {
+          "name": "Create Grade",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": 2,\n  \"courseId\": 1,\n  \"score\": 95,\n  \"letterGrade\": \"A\",\n  \"gradedAt\": \"2026-11-13T14:00:00\"\n}"
+            },
+            "url": "{{baseUrl}}/api/grades"
+          }
+        },
+        {
+          "name": "Get Grades by Student (ID 2)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/grades/student/2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transcript",
+      "item": [
+        {
+          "name": "Get Student Transcript (ID 2)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/students/2/transcript"
+          }
+        }
+      ]
+    }
+  ]
+}

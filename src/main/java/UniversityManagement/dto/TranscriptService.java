@@ -34,6 +34,7 @@ public class TranscriptService {
         this.gradeRepository = gradeRepository;
     }
 
+    // Get transcript for one student
     @Transactional(
         transactionManager = "gradeTransactionManager",
         readOnly = true
@@ -45,8 +46,31 @@ public class TranscriptService {
                 "Student not found with ID: " + studentId
             ));
 
+        return buildTranscript(student);
+    }
+
+    // Get transcripts for all students
+    @Transactional(
+        transactionManager = "gradeTransactionManager",
+        readOnly = true
+    )
+    public List<TranscriptDTO> getAllStudentTranscripts() {
+
+        List<Student> students = studentRepository.findAll();
+        List<TranscriptDTO> transcripts = new ArrayList<>();
+
+        for (Student student : students) {
+            transcripts.add(buildTranscript(student));
+        }
+
+        return transcripts;
+    }
+
+    // Build transcript using data from three databases
+    private TranscriptDTO buildTranscript(Student student) {
+
         List<Grade> studentGrades =
-            gradeRepository.findByStudentId(studentId);
+            gradeRepository.findByStudentId(student.getId());
 
         List<TranscriptItemDTO> transcriptItems = new ArrayList<>();
 

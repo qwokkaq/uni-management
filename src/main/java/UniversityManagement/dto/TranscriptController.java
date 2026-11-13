@@ -1,6 +1,8 @@
 
 package UniversityManagement.dto;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,10 +15,18 @@ public class TranscriptController {
         this.transcriptService = transcriptService;
     }
 
+    // Get transcript for one student
     @GetMapping("/{studentId}/transcript")
     public TranscriptDTO getTranscript(
             @PathVariable Long studentId) {
 
         return transcriptService.getStudentTranscript(studentId);
+    }
+
+    // Get transcripts for all students
+    @GetMapping("/transcripts")
+    public List<TranscriptDTO> getAllTranscripts() {
+
+        return transcriptService.getAllStudentTranscripts();
     }
 }
